@@ -2,13 +2,13 @@ require 'addressable/uri'
 require 'timeout'
 require 'net/http'
 require 'open-uri'
-require 'omniauth'
+require 'omniauth-oauth2'
 require 'openid_connect'
 
 module OmniAuth
   module Strategies
-    class OpenIDConnect
-      include OmniAuth::Strategy
+    class OpenIDConnect < OmniAuth::Strategies::OAuth2
+      # include OmniAuth::Strategy
 
       option :client_options, {
         identifier: nil,
