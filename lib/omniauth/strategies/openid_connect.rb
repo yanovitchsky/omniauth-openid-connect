@@ -5,6 +5,26 @@ require 'open-uri'
 require 'omniauth-oauth2'
 require 'openid_connect'
 
+module OpenIDConnect
+  class AccessToken
+    def refresh!
+      self
+    end
+
+    def expired?
+      false
+    end
+
+    def expires?
+      false
+    end
+
+    def token
+      self.access_token
+    end
+  end
+end
+
 module OmniAuth
   module Strategies
     class OpenIDConnect < OmniAuth::Strategies::OAuth2
@@ -134,6 +154,12 @@ module OmniAuth
         else
           key_or_secret
         end
+      end
+
+      protected
+
+      def build_access_token
+        @access_token
       end
 
       private
